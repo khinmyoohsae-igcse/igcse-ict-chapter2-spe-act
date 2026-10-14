@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGCSE ICT - Speakers & Actuators Quiz (Shuffled Answers)</title>
+    <style>
+        :root {
+            --bg-main: #090d16;
+            --bg-card: #131d31;
+            --border-color: #223354;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        header h1 {
+            color: var(--accent);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .quiz-status {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .score-pill {
+            background-color: #0c4a6e;
+            color: #7dd3fc;
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #0284c7;
+        }
+
+        .card {
+            width: 100%;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            background-color: #1e293b;
+            color: var(--text-main);
+            padding: 1rem 1.25rem;
+            border-radius: 0.85rem;
+            border: 1px solid #334155;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background-color: #283548;
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        .option-btn.correct {
+            background-color: #064e3b !important;
+            border-color: #059669 !important;
+            color: #ecfdf5 !important;
+        }
+
+        .option-btn.incorrect {
+            background-color: #7f1d1d !important;
+            border-color: #dc2626 !important;
+            color: #fee2e2 !important;
+        }
+
+        .feedback-box {
+            padding: 1.15rem;
+            border-radius: 0.85rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .feedback-box.correct-feedback {
+            background-color: #022c22;
+            border: 1px solid #047857;
+            color: #a7f3d0;
+        }
+
+        .feedback-box.incorrect-feedback {
+            background-color: #450a0a;
+            border: 1px solid #b91c1c;
+            color: #fecdd3;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #0f172a;
+            font-weight: 700;
+            padding: 0.85rem 1.75rem;
+            border-radius: 0.85rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .results-card {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .results-card h2 {
+            font-size: 2.25rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .results-card p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IGCSE ICT Practice Quiz</h1>
+        <p>Topics 2.3.7 Speakers & 2.3.8 Actuators</p>
+    </header>
+
+    <main>
+        <div class="quiz-status">
+            <span id="question-counter">Question 1 of 30</span>
+            <span id="score-display" class="score-pill">Score: 0</span>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="card">
+            <div id="question-box" class="question-text">
+                Loading question...
+            </div>
+
+            <div id="options-container" class="options-list">
+                <!-- Options populated dynamically -->
+            </div>
+
+            <div id="feedback-box" class="feedback-box hidden">
+                <!-- Feedback populated dynamically -->
+            </div>
+
+            <div style="display: flex; justify-content: flex-end;">
+                <button id="next-btn" onclick="nextQuestion()" class="btn-primary hidden">Next Question</button>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div id="results-container" class="card results-card hidden">
+            <h2>Quiz Completed! 🎉</h2>
+            <p id="final-score">You scored X out of 30</p>
+            <button onclick="restartQuiz()" class="btn-primary">Restart Quiz</button>
+        </div>
+    </main>
+
+    <footer>
+        IGCSE ICT Revision &bull; Speakers and Actuators
+    </footer>
+
+    <script>
+        const questions = [
+            // Speakers Questions (1 to 15)
+            {
+                question: "What is the primary function of a speaker in a computer system?",
+                options: [
+                    { text: "To output audio signals (sound) so users can hear music, speech, and sound effects", isCorrect: true, rationale: "Speakers convert electrical audio signals into audible sound waves as output." },
+                    { text: "To capture physical microphone audio waves for recording", isCorrect: false, rationale: "Capturing sound is the role of an input microphone." },
+                    { text: "To project large-format video presentations onto walls", isCorrect: false, rationale: "This describes multimedia projectors." },
+                    { text: "To print permanent paper documents", isCorrect: false, rationale: "This describes printers." }
+                ]
+            },
+            {
+                question: "What hardware component is required inside a computer system to convert digital audio data files into analogue electrical signals before they reach the speakers?",
+                options: [
+                    { text: "Digital to Analogue Converter (DAC)", isCorrect: true, rationale: "Computers store audio as digital binary data; a DAC converts this into analogue electrical waves for speakers." },
+                    { text: "Analogue to Digital Converter (ADC)", isCorrect: false, rationale: "An ADC converts analogue waves into digital data (used for microphones and sensors)." },
+                    { text: "Network Interface Card (NIC)", isCorrect: false, rationale: "An NIC connects computers to networks." },
+                    { text: "Arithmetic and Logic Unit (ALU)", isCorrect: false, rationale: "The ALU performs mathematical calculations." }
+                ]
+            },
+            {
+                question: "How does a traditional speaker physically produce sound waves?",
+                options: [
+                    { text: "By passing an electrical current through a coil within a magnetic field, causing a speaker cone to vibrate back and forth", isCorrect: true, rationale: "Electromagnetic induction causes the speaker cone to oscillate, compressing air to create sound waves." },
+                    { text: "By shining a red laser light onto microscopic pits and lands", isCorrect: false, rationale: "This describes optical disc reading." },
+                    { text: "By fusing dry toner powder onto paper using heat rollers", isCorrect: false, rationale: "This describes laser printers." },
+                    { text: "By melting plastic filament spools layer by layer", isCorrect: false, rationale: "This describes 3D printers." }
+                ]
+            },
+            {
+                question: "What are the typical real-world uses of computer speakers?",
+                options: [
+                    { text: "Playing music and sound effects in computer games, voice communication in video conferences, and audio alerts", isCorrect: true, rationale: "Speakers provide audio output across entertainment, communication, and system notifications." },
+                    { text: "Scanning supermarket barcodes at checkout tills", isCorrect: false, rationale: "Supermarkets use barcode scanners." },
+                    { text: "Marking multiple-choice student exam bubble sheets", isCorrect: false, rationale: "Exams are marked using OMR scanners." },
+                    { text: "Measuring ambient room air temperature", isCorrect: false, rationale: "Temperature is measured by sensors." }
+                ]
+            },
+            {
+                question: "What is a major advantage of audio output via speakers compared to reading text on a screen?",
+                options: [
+                    { text: "It allows hands-free, accessible communication for users with visual impairments or when multitasking", isCorrect: true, rationale: "Audio provides accessible communication and allows users to receive information without looking at a monitor." },
+                    { text: "It eliminates the need for any computer processor or RAM", isCorrect: false, rationale: "Computers require CPUs and RAM to process audio." },
+                    { text: "It permanently prints physical documents onto paper sheets", isCorrect: false, rationale: "Printing paper documents is done by printers." },
+                    { text: "It consumes zero electrical power", isCorrect: false, rationale: "Amplified speakers require electrical power." }
+                ]
+            },
+            {
+                question: "What is a disadvantage or limitation of relying solely on speakers for computer output?",
+                options: [
+                    { text: "Sound can disturb other people in shared environments, and audio lacks the detailed textual or graphical precision of a monitor", isCorrect: true, rationale: "Speakers can be noisy in public spaces and cannot convey complex graphical data or text as clearly as screens." },
+                    { text: "Speakers automatically delete all files from the hard disk drive", isCorrect: false, rationale: "This is false." },
+                    { text: "Speakers are massive industrial machines weighing over 100 kilograms", isCorrect: false, rationale: "Computer speakers are typically small and lightweight." },
+                    { text: "Speakers cannot reproduce human speech languages", isCorrect: false, rationale: "Speakers reproduce speech effortlessly." }
+                ]
+            },
+            {
+                question: "Why do high-powered computer or home theater speakers require an external amplifier (or built-in amplifier circuitry)?",
+                options: [
+                    { text: "To boost weak audio electrical signals from the computer's sound card so they have enough power to drive the speaker cone effectively", isCorrect: true, rationale: "Audio signals from sound cards are low-voltage and require amplification to drive large speaker cones." },
+                    { text: "To cool down the computer's CPU microchip during gaming", isCorrect: false, rationale: "CPU cooling is handled by heatsinks and fans." },
+                    { text: "To convert digital files into physical paper printouts", isCorrect: false, rationale: "This is done by printers." },
+                    { text: "To connect the computer to Wi-Fi broadband internet", isCorrect: false, rationale: "Wi-Fi uses wireless network adapters." }
+                ]
+            },
+            {
+                question: "What role do speakers play in computer-controlled warning and alarm systems (such as factory safety alerts or security alarms)?",
+                options: [
+                    { text: "They output audible siren or voice alerts to warn operators immediately when a sensor detects an emergency", isCorrect: true, rationale: "Automated monitoring systems use speakers to sound instant alarms when danger or system faults occur." },
+                    { text: "They print out monthly security incident reports on paper", isCorrect: false, rationale: "Printing reports requires a printer." },
+                    { text: "They measure room temperature and humidity levels", isCorrect: false, rationale: "Temperature is measured by environmental sensors." },
+                    { text: "They lock physical doors using magnetic bolts", isCorrect: false, rationale: "Locking doors is performed by actuators." }
+                ]
+            },
+            {
+                question: "What is synthetic speech output (text-to-speech) produced by speakers used for?",
+                options: [
+                    { text: "Screen-reading software for visually impaired users, automated phone customer service menus, and GPS navigation directions", isCorrect: true, rationale: "Text-to-speech software converts digital text into spoken audio output via speakers for accessibility and navigation." },
+                    { text: "Recording human voice songs in professional music studios", isCorrect: false, rationale: "Recording requires microphones." },
+                    { text: "Scanning paper barcoded labels", isCorrect: false, rationale: "Barcode scanning uses optical readers." },
+                    { text: "Compiling high-level programming code", isCorrect: false, rationale: "Code compilation uses system software." }
+                ]
+            },
+            {
+                question: "Which hardware category does a computer speaker belong to?",
+                options: [
+                    { text: "Audio output devices", isCorrect: true, rationale: "Speakers provide soft-copy audio output." },
+                    { text: "Manual data entry input devices", isCorrect: false, rationale: "Speakers output sound; they do not input data." },
+                    { text: "Non-volatile backing storage media", isCorrect: false, rationale: "Speakers do not store files permanently." },
+                    { text: "Primary volatile RAM memory chips", isCorrect: false, rationale: "This describes RAM." }
+                ]
+            },
+            {
+                question: "How do stereo speakers differ from mono speakers in a computer setup?",
+                options: [
+                    { text: "Stereo speakers use two independent audio channels (left and right) to create a sense of directional space and sound depth", isCorrect: true, rationale: "Stereo sound separates audio across left and right channels for immersive spatial awareness." },
+                    { text: "Stereo speakers print color documents, while mono speakers print black text", isCorrect: false, rationale: "Speakers output sound, not printed documents." },
+                    { text: "Mono speakers require two DAC converters, whereas stereo speakers require none", isCorrect: false, rationale: "This is incorrect." },
+                    { text: "Stereo speakers operate entirely without electrical power", isCorrect: false, rationale: "All powered speakers require electricity." }
+                ]
+            },
+            {
+                question: "What happens if speaker audio cables are plugged into the wrong audio port on a computer motherboard?",
+                options: [
+                    { text: "No sound will be produced, or audio may be distorted or sent to the wrong audio jack", isCorrect: true, rationale: "Incorrect port connection prevents proper signal routing, resulting in silence or audio failure." },
+                    { text: "The computer's hard disk drive will format itself", isCorrect: false, rationale: "Audio cabling has no effect on storage drives." },
+                    { text: "The monitor resolution will drop to 1 bit", isCorrect: false, rationale: "Display resolution is independent of audio jacks." },
+                    { text: "The power supply unit will overheat and shut down", isCorrect: false, rationale: "This is false." }
+                ]
+            },
+            {
+                question: "Why might a multi-speaker surround sound system be used in a gaming or movie computer setup?",
+                options: [
+                    { text: "To deliver immersive 3D positional audio so users can hear sound effects coming from different directions around the room", isCorrect: true, rationale: "Surround sound places multiple speakers around the user for realistic spatial audio immersion." },
+                    { text: "To double the computer's CPU processing speed", isCorrect: false, rationale: "Audio equipment does not alter CPU speed." },
+                    { text: "To replace the need for a monitor display screen", isCorrect: false, rationale: "Visuals still require a screen." },
+                    { text: "To print high-resolution blueprints", isCorrect: false, rationale: "Blueprints are printed by plotters." }
+                ]
+            },
+            {
+                question: "What is an acoustic issue that can occur if a microphone is placed too close to active computer speakers during a video call?",
+                options: [
+                    { text: "Audio feedback loop (a loud squealing noise caused by sound from the speakers being picked up repeatedly by the microphone)", isCorrect: true, rationale: "Speaker output re-entering the microphone creates a continuous amplification loop known as audio feedback." },
+                    { text: "The computer screen shatters into glass fragments", isCorrect: false, rationale: "Audio feedback does not break glass." },
+                    { text: "The internet connection speed increases to 10Gbps", isCorrect: false, rationale: "Network speed is unaffected." },
+                    { text: "The keyboard keys lock permanently", isCorrect: false, rationale: "This is false." }
+                ]
+            },
+            {
+                question: "Which summary best highlights the role of speakers in computer systems?",
+                options: [
+                    { text: "Speakers convert processed digital audio data into audible acoustic sound waves, providing vital audio output for entertainment, alerts, and communication", isCorrect: true, rationale: "Speakers translate electrical audio signals into sound waves for human listening." },
+                    { text: "Speakers capture physical voice sounds from the room and convert them into digital data", isCorrect: false, rationale: "Capturing sound is done by microphones." },
+                    { text: "Speakers permanently store music albums on magnetic platters", isCorrect: false, rationale: "Music storage is handled by backing storage." },
+                    { text: "Speakers display graphical video output onto a glass screen", isCorrect: false, rationale: "Visual display is handled by monitors." }
+                ]
+            },
+
+            // Actuators Questions (16 to 30)
+            {
+                question: "What is the primary function of an actuator in a computer-controlled system?",
+                options: [
+                    { text: "To take output signals from a computer and convert them into physical movement or action in the real world", isCorrect: true, rationale: "Actuators act as output transducers that create physical mechanical movement based on computer instructions." },
+                    { text: "To measure physical environmental quantities like temperature or light levels", isCorrect: false, rationale: "Measuring conditions is the role of sensors, not actuators." },
+                    { text: "To display temporary soft-copy visual images onto a screen", isCorrect: false, rationale: "Visual display is handled by monitors." },
+                    { text: "To store long-term backup files on magnetic disks", isCorrect: false, rationale: "File storage is handled by backing storage." }
+                ]
+            },
+            {
+                question: "Why is an actuator classified as an output device in computer control and monitoring systems?",
+                options: [
+                    { text: "Because it receives control signals from the computer's microprocessor and performs a physical action or operation", isCorrect: true, rationale: "Actuators output physical mechanical motion driven by computer signals." },
+                    { text: "Because it captures input data from the external environment", isCorrect: false, rationale: "Capturing environment data is done by sensors." },
+                    { text: "Because it prints permanent paper documents", isCorrect: false, rationale: "Printing paper is done by printers." },
+                    { text: "Because it emits sound waves for human listening", isCorrect: false, rationale: "Sound output is produced by speakers." }
+                ]
+            },
+            {
+                question: "What hardware component is typically required between a digital computer microprocessor and an analogue/mechanical actuator?",
+                options: [
+                    { text: "Digital to Analogue Converter (DAC) and relay/driver circuit", isCorrect: true, rationale: "Microprocessors output low-voltage digital signals, which must be converted and amplified via DACs and relays to drive heavy actuators." },
+                    { text: "Analogue to Digital Converter (ADC)", isCorrect: false, rationale: "An ADC is used for input sensors, not output actuators." },
+                    { text: "Optical Character Recognition (OCR) scanner", isCorrect: false, rationale: "OCR is for document reading." },
+                    { text: "Arithmetic and Logic Unit (ALU)", isCorrect: false, rationale: "The ALU performs calculations inside the CPU." }
+                ]
+            },
+            {
+                question: "What are some common real-world examples of actuators used in automated systems?",
+                options: [
+                    { text: "Motors (turning fans or conveyor belts), heaters, pumps, valves, and solenoids (opening doors or locks)", isCorrect: true, rationale: "Motors, heaters, valves, and pumps are standard actuators that create physical motion, heat, or fluid flow." },
+                    { text: "Keyboards, mice, and touch screen sensors", isCorrect: false, rationale: "These are input devices." },
+                    { text: "Monitors, projectors, and audio speakers", isCorrect: false, rationale: "These are visual/audio output devices." },
+                    { text: "Hard disk drives and USB flash memory sticks", isCorrect: false, rationale: "These are backing storage devices." }
+                ]
+            },
+            {
+                question: "How do sensors and actuators work together in an automated greenhouse climate-control system?",
+                options: [
+                    { text: "Sensors measure environmental conditions (temperature/moisture) and send data to the computer; if values are too high, the computer activates actuators (heaters, water pumps, or window motors) to adjust the environment", isCorrect: true, rationale: "Sensors provide input monitoring, the computer processes data against preset rules, and actuators execute physical output adjustments." },
+                    { text: "Actuators measure the temperature, while sensors open and close the roof windows", isCorrect: false, rationale: "This is completely reversed; sensors measure and actuators perform physical action." },
+                    { text: "Sensors print out paper reports while actuators store files on tape", isCorrect: false, rationale: "This is incorrect." },
+                    { text: "Sensors and actuators operate independently without any computer microprocessor", isCorrect: false, rationale: "The microprocessor is the central controller coordinating both." }
+                ]
+            },
+            {
+                question: "In an automated street lighting system, what role does the actuator play compared to the light sensor?",
+                options: [
+                    { text: "The light sensor detects when ambient darkness falls, and the actuator (relay switch) physically turns the street lamps on", isCorrect: true, rationale: "The sensor provides dark/light input data, and the actuator switch executes the physical power output to the lamps." },
+                    { text: "The actuator measures sunlight intensity, while the sensor turns on the lights", isCorrect: false, rationale: "This is reversed." },
+                    { text: "Both the sensor and actuator perform identical input scanning tasks", isCorrect: false, rationale: "One is input (sensor), one is output (actuator)." },
+                    { text: "The actuator prints paper bills for electricity usage", isCorrect: false, rationale: "This is incorrect." }
+                ]
+            },
+            {
+                question: "What is a motor actuator used for in an automated washing machine?",
+                options: [
+                    { text: "To rotate the washing drum at high speeds during wash and spin cycles", isCorrect: true, rationale: "An electric motor actuator drives the mechanical rotation of the laundry drum." },
+                    { text: "To measure the water temperature inside the tub", isCorrect: false, rationale: "Temperature measurement uses a thermal sensor." },
+                    { text: "To display the remaining wash time on an LCD screen", isCorrect: false, rationale: "Displaying time uses an output monitor/screen." },
+                    { text: "To print paper laundry instruction labels", isCorrect: false, rationale: "Printing uses a printer." }
+                ]
+            },
+            {
+                question: "What is a valve actuator used for in an automated chemical mixing plant or central heating system?",
+                options: [
+                    { text: "To open or close pipes automatically, controlling the flow of liquids or gas based on computer commands", isCorrect: true, rationale: "Valve actuators regulate fluid and gas flow through pipelines in response to microprocessor signals." },
+                    { text: "To record human speech instructions into microphone files", isCorrect: false, rationale: "This is audio recording." },
+                    { text: "To scan supermarket barcodes on chemical containers", isCorrect: false, rationale: "This is barcode scanning." },
+                    { text: "To project CAD blueprints onto factory walls", isCorrect: false, rationale: "This is a multimedia projector." }
+                ]
+            },
+            {
+                question: "What is a heater actuator (or heating element) used for in an automated incubator or central heating boiler?",
+                options: [
+                    { text: "To increase ambient temperature when triggered by low temperature sensor readings", isCorrect: true, rationale: "Heater actuators generate thermal energy output to warm environments when commanded by the controller." },
+                    { text: "To cool down room air conditioning systems", isCorrect: false, rationale: "Cooling uses refrigeration compressors/fans." },
+                    { text: "To measure water pressure in pipes", isCorrect: false, rationale: "Pressure is measured by pressure sensors." },
+                    { text: "To capture digital camera photographs", isCorrect: false, rationale: "This is camera input." }
+                ]
+            },
+            {
+                question: "What is a major advantage of using automated actuators in industrial manufacturing and hazardous environments?",
+                options: [
+                    { text: "They perform heavy, dangerous, or repetitive physical tasks accurately without putting human workers at risk in hazardous zones", isCorrect: true, rationale: "Actuators automate dangerous physical labor in toxic, hot, or high-pressure environments reliably." },
+                    { text: "They eliminate the need for any electricity or power sources", isCorrect: false, rationale: "Actuators require electrical or pneumatic power to operate." },
+                    { text: "They automatically write high-level programming code", isCorrect: false, rationale: "Coding is done by software engineers." },
+                    { text: "They can be used as portable mobile phones", isCorrect: false, rationale: "This is incorrect." }
+                ]
+            },
+            {
+                question: "What is a disadvantage or risk associated with relying entirely on automated actuators in critical control systems (like nuclear power plant valves)?",
+                options: [
+                    { text: "If a software bug occurs or power fails, an actuator malfunction could lead to catastrophic physical damage or system failure without manual override", isCorrect: true, rationale: "Automated physical control carries high stakes; software errors or actuator jams can cause severe accidents if failsafes fail." },
+                    { text: "Actuators consume zero electrical power and never wear out", isCorrect: false, rationale: "Mechanical parts experience physical wear and tear." },
+                    { text: "Actuators automatically translate foreign languages into English", isCorrect: false, rationale: "This is unrelated." },
+                    { text: "Actuators cannot move faster than one millimeter per year", isCorrect: true.split()[0] === 'false' && true, rationale: "Actuators can operate at high mechanical speeds." }
+                ]
+            },
+            {
+                question: "How does a pneumatic or hydraulic actuator differ from an electric motor actuator?",
+                options: [
+                    { text: "Pneumatic/hydraulic actuators use compressed air or pressurized fluid to create mechanical force, whereas electric motors use electromagnetic coils and electrical current", isCorrect: true, rationale: "Power sources differ: fluid/air pressure drives hydraulics/pneumatics, while electricity drives motors." },
+                    { text: "Pneumatic actuators print paper documents, while electric motors scan barcodes", isCorrect: false, rationale: "This is incorrect." },
+                    { text: "Pneumatic actuators are volatile memory chips, while electric motors are backing storage", isCorrect: false, rationale: "This is incorrect." },
+                    { text: "There is no difference between them; they are identical", isCorrect: false, rationale: "They use different mechanical power mediums." }
+                ]
+            },
+            {
+                question: "What happens in an automated security gate system when an authorized RFID badge is scanned?",
+                options: [
+                    { text: "The computer verifies the RFID data and sends a signal to a solenoid/motor actuator to unlock and open the physical gate", isCorrect: true, rationale: "The RFID reader provides input, the computer verifies it, and an actuator opens the physical barrier." },
+                    { text: "The computer prints out a paper receipt using a 3D printer", isCorrect: false, rationale: "Security gates do not use 3D printers." },
+                    { text: "The security gate sounds a continuous microphone feedback squeal", isCorrect: false, rationale: "This is an audio error, not an access action." },
+                    { text: "The gate displays a spreadsheet on a plotter", isCorrect: false, rationale: "This is incorrect." }
+                ]
+            },
+            {
+                question: "Which input/output device pairing represents a complete closed-loop feedback control system?",
+                options: [
+                    { text: "Temperature sensor (input) connected to a microprocessor and a heater actuator (output)", isCorrect: true, rationale: "A closed-loop system uses sensors to monitor conditions and actuators to adjust them continuously based on feedback." },
+                    { text: "Keyboard (input) connected to a mouse (input)", isCorrect: false, rationale: "Both are input devices." },
+                    { text: "Monitor (output) connected to a projector (output)", isCorrect: false, rationale: "Both are output devices." },
+                    { text: "Hard disk drive (storage) connected to a USB flash stick (storage)", isCorrect: false, rationale: "Both are storage devices." }
+                ]
+            },
+            {
+                question: "Which summary best contrasts the functions of sensors and actuators in computer-controlled systems?",
+                options: [
+                    { text: "Sensors are input devices that measure physical environmental variables, whereas actuators are output devices that produce physical mechanical movement or action", isCorrect: true, rationale: "Sensors monitor the real world (input), and actuators change the real world (output)." },
+                    { text: "Sensors produce physical mechanical movement, while actuators measure room temperature", isCorrect: false, rationale: "This is completely reversed." },
+                    { text: "Sensors and actuators are both software programs running inside RAM", isCorrect: false, rationale: "Both are physical hardware peripheral devices." },
+                    { text: "Neither sensors nor actuators require a computer microprocessor to function", isCorrect: false, rationale: "A microprocessor is essential to process sensor readings and control actuators." }
+                ]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        const questionCounter = document.getElementById("question-counter");
+        const scoreDisplay = document.getElementById("score-display");
+        const questionBox = document.getElementById("question-box");
+        const optionsContainer = document.getElementById("options-container");
+        const feedbackBox = document.getElementById("feedback-box");
+        const nextBtn = document.getElementById("next-btn");
+        const quizContainer = document.getElementById("quiz-container");
+        const resultsContainer = document.getElementById("results-container");
+        const finalScore = document.getElementById("final-score");
+
+        function loadQuestion() {
+            answered = false;
+            feedbackBox.classList.add("hidden");
+            nextBtn.classList.add("hidden");
+            
+            const q = questions[currentQuestionIndex];
+            questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            scoreDisplay.textContent = `Score: ${score}`;
+            questionBox.textContent = q.question;
+
+            // Shuffle options array randomly so correct answer is not always first
+            let shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+
+            optionsContainer.innerHTML = "";
+            shuffledOptions.forEach((opt) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.textContent = opt.text;
+                btn.onclick = () => selectOption(opt, shuffledOptions);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedOpt, shuffledOptions) {
+            if (answered) return;
+            answered = true;
+
+            const allOptionButtons = optionsContainer.children;
+
+            shuffledOptions.forEach((opt, idx) => {
+                allOptionButtons[idx].disabled = true;
+                if (opt.isCorrect) {
+                    allOptionButtons[idx].classList.add("correct");
+                } else if (opt === selectedOpt && !selectedOpt.isCorrect) {
+                    allOptionButtons[idx].classList.add("incorrect");
+                }
+            });
+
+            feedbackBox.classList.remove("hidden");
+            if (selectedOpt.isCorrect) {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                feedbackBox.className = "feedback-box correct-feedback";
+                feedbackBox.innerHTML = `<strong>Correct!</strong> ${selectedOpt.rationale}`;
+            } else {
+                feedbackBox.className = "feedback-box incorrect-feedback";
+                feedbackBox.innerHTML = `<strong>Incorrect.</strong> ${selectedOpt.rationale}`;
+            }
+
+            if (currentQuestionIndex < questions.length - 1) {
+                nextBtn.textContent = "Next Question";
+            } else {
+                nextBtn.textContent = "View Results";
+            }
+            nextBtn.classList.remove("hidden");
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                quizContainer.classList.add("hidden");
+                resultsContainer.classList.remove("hidden");
+                finalScore.textContent = `You scored ${score} out of ${questions.length}`;
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultsContainer.classList.add("hidden");
+            quizContainer.classList.remove("hidden");
+            loadQuestion();
+        }
+
+        // Initialize quiz on load
+        loadQuestion();
+    </script>
+</body>
+</html>
