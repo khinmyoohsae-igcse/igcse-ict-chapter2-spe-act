@@ -492,43 +492,43 @@
                     { text: "If a software bug occurs or power fails, an actuator malfunction could lead to catastrophic physical damage or system failure without manual override", isCorrect: true, rationale: "Automated physical control carries high stakes; software errors or actuator jams can cause severe accidents if failsafes fail." },
                     { text: "Actuators consume zero electrical power and never wear out", isCorrect: false, rationale: "Mechanical parts experience physical wear and tear." },
                     { text: "Actuators automatically translate foreign languages into English", isCorrect: false, rationale: "This is unrelated." },
-                    { text: "Actuators cannot move faster than one millimeter per year", isCorrect: true.split()[0] === 'false' && true, rationale: "Actuators can operate at high mechanical speeds." }
+                    { text: "Actuators cannot move faster than one millimeter per year", isCorrect: false, rationale: "Actuators can operate at high mechanical speeds." }
                 ]
             },
             {
                 question: "How does a pneumatic or hydraulic actuator differ from an electric motor actuator?",
                 options: [
-                    { text: "Pneumatic/hydraulic actuators use compressed air or pressurized fluid to create mechanical force, whereas electric motors use electromagnetic coils and electrical current", isCorrect: true, rationale: "Power sources differ: fluid/air pressure drives hydraulics/pneumatics, while electricity drives motors." },
-                    { text: "Pneumatic actuators print paper documents, while electric motors scan barcodes", isCorrect: false, rationale: "This is incorrect." },
-                    { text: "Pneumatic actuators are volatile memory chips, while electric motors are backing storage", isCorrect: false, rationale: "This is incorrect." },
-                    { text: "There is no difference between them; they are identical", isCorrect: false, rationale: "They use different mechanical power mediums." }
+                    { text: "Pneumatic/hydraulic actuators use compressed air or pressurized fluid to create mechanical force, whereas electric motors use electrical current and magnetic fields to produce rotary or linear motion", isCorrect: true, rationale: "Pneumatic and hydraulic systems rely on compressed fluids/air under pressure, while electric motor actuators rely on electrical power and electromagnetic principles." },
+                    { text: "Pneumatic actuators run exclusively on nuclear fuel rods", isCorrect: false, rationale: "Pneumatic systems operate on compressed air." },
+                    { text: "Electric motors use compressed steam only", isCorrect: false, rationale: "Electric motors run on electricity." },
+                    { text: "There is no functional difference between them", isCorrect: false, rationale: "They use entirely different driving forces (fluids/air vs electromagnetism)." }
                 ]
             },
             {
-                question: "What happens in an automated security gate system when an authorized RFID badge is scanned?",
+                question: "What role does a solenoid play as an electromechanical actuator?",
                 options: [
-                    { text: "The computer verifies the RFID data and sends a signal to a solenoid/motor actuator to unlock and open the physical gate", isCorrect: true, rationale: "The RFID reader provides input, the computer verifies it, and an actuator opens the physical barrier." },
-                    { text: "The computer prints out a paper receipt using a 3D printer", isCorrect: false, rationale: "Security gates do not use 3D printers." },
-                    { text: "The security gate sounds a continuous microphone feedback squeal", isCorrect: false, rationale: "This is an audio error, not an access action." },
-                    { text: "The gate displays a spreadsheet on a plotter", isCorrect: false, rationale: "This is incorrect." }
+                    { text: "It converts an electrical current into a magnetic field to move a plunger, producing linear motion to operate valves or switches", isCorrect: true, rationale: "A solenoid uses a coil of wire and a magnetic core to create linear pulling or pushing movement." },
+                    { text: "It prints high-resolution color photographs on paper", isCorrect: false, rationale: "Printing is handled by printers." },
+                    { text: "It converts audio sound waves into digital data files", isCorrect: false, rationale: "This describes microphones." },
+                    { text: "It provides permanent backing storage for operating systems", isCorrect: false, rationale: "Storage is handled by hard drives or SSDs." }
                 ]
             },
             {
-                question: "Which input/output device pairing represents a complete closed-loop feedback control system?",
+                question: "Why is a driver circuit or relay often necessary between a microprocessor and a high-power actuator like an electric motor?",
                 options: [
-                    { text: "Temperature sensor (input) connected to a microprocessor and a heater actuator (output)", isCorrect: true, rationale: "A closed-loop system uses sensors to monitor conditions and actuators to adjust them continuously based on feedback." },
-                    { text: "Keyboard (input) connected to a mouse (input)", isCorrect: false, rationale: "Both are input devices." },
-                    { text: "Monitor (output) connected to a projector (output)", isCorrect: false, rationale: "Both are output devices." },
-                    { text: "Hard disk drive (storage) connected to a USB flash stick (storage)", isCorrect: false, rationale: "Both are storage devices." }
+                    { text: "Microprocessors output very low-voltage/low-current digital signals that are insufficient to directly power heavy electrical actuators", isCorrect: true, rationale: "Relays and driver circuits act as switches/amplifiers so weak computer signals can safely control high-voltage hardware." },
+                    { text: "To cool down the computer screen during long usage", isCorrect: false, rationale: "Cooling is managed by fans and heatsinks." },
+                    { text: "To connect the computer directly to local Wi-Fi networks", isCorrect: false, rationale: "Wi-Fi uses wireless adapters." },
+                    { text: "To convert analogue data into binary strings", isCorrect: false, rationale: "This is done by ADCs." }
                 ]
             },
             {
-                question: "Which summary best contrasts the functions of sensors and actuators in computer-controlled systems?",
+                question: "Which option correctly summarizes the collaborative loop in an automated monitoring and control system?",
                 options: [
-                    { text: "Sensors are input devices that measure physical environmental variables, whereas actuators are output devices that produce physical mechanical movement or action", isCorrect: true, rationale: "Sensors monitor the real world (input), and actuators change the real world (output)." },
-                    { text: "Sensors produce physical mechanical movement, while actuators measure room temperature", isCorrect: false, rationale: "This is completely reversed." },
-                    { text: "Sensors and actuators are both software programs running inside RAM", isCorrect: false, rationale: "Both are physical hardware peripheral devices." },
-                    { text: "Neither sensors nor actuators require a computer microprocessor to function", isCorrect: false, rationale: "A microprocessor is essential to process sensor readings and control actuators." }
+                    { text: "Sensors gather physical input data -> Microprocessor processes and compares data against preset parameters -> Actuators execute physical output actions", isCorrect: true, rationale: "This represents the fundamental cycle of automated control systems: input (sensors) -> processing (microprocessor) -> output (actuators)." },
+                    { text: "Actuators gather data -> Microprocessor prints documents -> Sensors output sound", isCorrect: false, rationale: "This is completely incorrect." },
+                    { text: "Speakers record audio -> Hard drives control motors -> Sensors display video", isCorrect: false, rationale: "This mixes up unrelated hardware categories." },
+                    { text: "Microprocessors measure temperature directly without any sensors", isCorrect: false, rationale: "Microprocessors require sensors to measure physical quantities." }
                 ]
             }
         ];
@@ -547,41 +547,56 @@
         const resultsContainer = document.getElementById("results-container");
         const finalScore = document.getElementById("final-score");
 
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        // Shuffle question order on load
+        shuffleArray(questions);
+
         function loadQuestion() {
             answered = false;
             feedbackBox.classList.add("hidden");
             nextBtn.classList.add("hidden");
-            
-            const q = questions[currentQuestionIndex];
+
+            const currentQ = questions[currentQuestionIndex];
             questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
             scoreDisplay.textContent = `Score: ${score}`;
-            questionBox.textContent = q.question;
-
-            // Shuffle options array randomly so correct answer is not always first
-            let shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+            questionBox.textContent = currentQ.question;
 
             optionsContainer.innerHTML = "";
-            shuffledOptions.forEach((opt) => {
+
+            // Shuffle options for each question so correct answers aren't always first
+            let shuffledOptions = [...currentQ.options];
+            shuffleArray(shuffledOptions);
+
+            shuffledOptions.forEach(opt => {
                 const btn = document.createElement("button");
                 btn.className = "option-btn";
                 btn.textContent = opt.text;
-                btn.onclick = () => selectOption(opt, shuffledOptions);
+                btn.onclick = () => selectOption(opt, btn);
                 optionsContainer.appendChild(btn);
             });
         }
 
-        function selectOption(selectedOpt, shuffledOptions) {
+        function selectOption(selectedOpt, selectedBtn) {
             if (answered) return;
             answered = true;
 
-            const allOptionButtons = optionsContainer.children;
-
-            shuffledOptions.forEach((opt, idx) => {
-                allOptionButtons[idx].disabled = true;
-                if (opt.isCorrect) {
-                    allOptionButtons[idx].classList.add("correct");
-                } else if (opt === selectedOpt && !selectedOpt.isCorrect) {
-                    allOptionButtons[idx].classList.add("incorrect");
+            const allButtons = optionsContainer.querySelectorAll(".option-btn");
+            allButtons.forEach(btn => {
+                btn.disabled = true;
+                const matchingOpt = questions[currentQuestionIndex].options.find(o => o.text === btn.textContent);
+                if (matchingOpt.isCorrect) {
+                    btn.classList.add("correct");
+                } else if (btn === selectedBtn) {
+                    btn.classList.add("incorrect");
                 }
             });
 
@@ -590,17 +605,13 @@
                 score++;
                 scoreDisplay.textContent = `Score: ${score}`;
                 feedbackBox.className = "feedback-box correct-feedback";
-                feedbackBox.innerHTML = `<strong>Correct!</strong> ${selectedOpt.rationale}`;
+                feedbackBox.innerHTML = `<strong>Correct! 🎉</strong> ${selectedOpt.rationale}`;
             } else {
                 feedbackBox.className = "feedback-box incorrect-feedback";
-                feedbackBox.innerHTML = `<strong>Incorrect.</strong> ${selectedOpt.rationale}`;
+                const correctOpt = questions[currentQuestionIndex].options.find(o => o.isCorrect);
+                feedbackBox.innerHTML = `<strong>Incorrect.</strong> ${selectedOpt.rationale}<br><br><em>Correct answer:</em> ${correctOpt.text}`;
             }
 
-            if (currentQuestionIndex < questions.length - 1) {
-                nextBtn.textContent = "Next Question";
-            } else {
-                nextBtn.textContent = "View Results";
-            }
             nextBtn.classList.remove("hidden");
         }
 
@@ -609,21 +620,26 @@
             if (currentQuestionIndex < questions.length) {
                 loadQuestion();
             } else {
-                quizContainer.classList.add("hidden");
-                resultsContainer.classList.remove("hidden");
-                finalScore.textContent = `You scored ${score} out of ${questions.length}`;
+                showResults();
             }
+        }
+
+        function showResults() {
+            quizContainer.classList.add("hidden");
+            resultsContainer.classList.remove("hidden");
+            finalScore.textContent = `You scored ${score} out of ${questions.length}`;
         }
 
         function restartQuiz() {
             currentQuestionIndex = 0;
             score = 0;
+            shuffleArray(questions);
             resultsContainer.classList.add("hidden");
             quizContainer.classList.remove("hidden");
             loadQuestion();
         }
 
-        // Initialize quiz on load
+        // Initialize first question
         loadQuestion();
     </script>
 </body>
